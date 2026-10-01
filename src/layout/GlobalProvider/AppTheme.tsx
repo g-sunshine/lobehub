@@ -24,6 +24,8 @@ import { preferenceSelectors, userGeneralSettingsSelectors } from '@/store/user/
 import { GlobalStyle } from '@/styles';
 import { setCookie } from '@/utils/client/cookie';
 
+import { DEEP_PURPLE_DARK_TOKEN } from './deepPurpleToken';
+
 const styles = createStaticStyles(({ css, cssVar }) => ({
   app: css`
     position: relative;
@@ -187,6 +189,7 @@ const AppTheme = memo<AppThemeProps>(
           theme={{
             cssVar: { key: 'lobe-vars' },
             token: {
+              ...(isDark && DEEP_PURPLE_DARK_TOKEN),
               fontFamily,
               fontFamilyCode,
               motion: animationMode !== 'disabled',

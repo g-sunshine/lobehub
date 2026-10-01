@@ -735,6 +735,7 @@ export default {
   'inactive': 'Inactive',
   'inbox.desc': 'Collaborate in one Workspace and move ideas into outcomes.',
   'inbox.title': 'Lobe AI',
+  'inbox.welcome': 'Your personal AI assistant',
   'input.addAi': 'Add an AI message',
   'input.addAiPrefillUnsupported':
     'The current model doesn’t support ending the conversation with an assistant message. Follow it with a user message before sending.',

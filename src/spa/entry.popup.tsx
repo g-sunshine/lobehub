@@ -21,7 +21,7 @@ startAppInitialization();
 const router = createAppRouter(popupRoutes);
 
 createSPARoot(document.getElementById('root')!).render(
-  <NextThemeProvider>
+  <NextThemeProvider forcedTheme={'dark'}>
     <RouterProvider router={router} />
   </NextThemeProvider>,
 );

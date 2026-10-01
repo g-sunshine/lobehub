@@ -37,10 +37,11 @@ const AgentInfo = memo(() => {
 
   const message = useMemo(() => {
     if (openingMessage) return openingMessage;
+    if (isInbox) return t('inbox.welcome');
     return t('agentDefaultMessageWithSystemRole', {
       name: displayTitle,
     });
-  }, [openingMessage, displayTitle, t]);
+  }, [openingMessage, isInbox, displayTitle, t]);
 
   if (isLoading) {
     return (

@@ -39,7 +39,7 @@ const router = createAppRouter(desktopRoutes);
 const showBootShell = isMainLayoutLocation(desktopRoutes, window.location.pathname);
 
 createSPARoot(document.getElementById('root')!).render(
-  <NextThemeProvider>
+  <NextThemeProvider forcedTheme={'dark'}>
     {showBootShell && <BootShell />}
     <RouterProvider router={router} />
   </NextThemeProvider>,
