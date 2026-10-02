@@ -7,6 +7,7 @@ import type { PluginOption, ViteDevServer } from 'vite';
 import { defineConfig, loadEnv } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+import { customBrandingFavicon } from './plugins/vite/customBrandingFavicon';
 import { customBrandingLoadingScreen } from './plugins/vite/customBrandingLoadingScreen';
 import { viteEnvRestartKeys } from './plugins/vite/envRestartKeys';
 import {
@@ -154,6 +155,7 @@ export default defineConfig({
       },
     vercelSkewProtection(),
     customBrandingLoadingScreen(),
+    customBrandingFavicon(),
     viteEnvRestartKeys(['APP_URL']),
     enableViteDevTools &&
       DevTools({

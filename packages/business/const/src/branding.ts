@@ -4,8 +4,10 @@
 
 export const LOBE_CHAT_CLOUD = 'LobeHub Cloud';
 
-export const BRANDING_NAME = 'LobeHub';
-export const BRANDING_LOGO_URL = '';
+// Typed as `string` so the `BRANDING_NAME !== 'LobeHub'` checks across the app
+// stay valid comparisons once the literal is no longer 'LobeHub'.
+export const BRANDING_NAME: string = 'Junying AI';
+export const BRANDING_LOGO_URL = '/brand/junying-logo.png';
 
 export const ORG_NAME = 'LobeHub';
 

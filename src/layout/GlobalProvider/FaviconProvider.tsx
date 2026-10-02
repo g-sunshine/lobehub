@@ -1,7 +1,10 @@
 'use client';
 
+import { BRANDING_LOGO_URL } from '@lobechat/business-const';
 import { type ReactNode } from 'react';
 import { createContext, memo, use, useCallback, useMemo, useState } from 'react';
+
+import { isCustomBranding } from '@/const/version';
 
 export type FaviconState = 'default' | 'done' | 'error' | 'progress';
 
@@ -41,7 +44,11 @@ const stateToFileName: Record<FaviconState, string> = {
   progress: '-progress',
 };
 
-const getFaviconPath = (state: FaviconState, isDev: boolean, size?: '32x32'): string => {
+export const getFaviconPath = (state: FaviconState, isDev: boolean, size?: '32x32'): string => {
+  // The per-state icons are LobeHub artwork; a custom brand ships a single
+  // logo, so every state keeps it rather than flashing the LobeHub mark.
+  if (isCustomBranding && BRANDING_LOGO_URL) return BRANDING_LOGO_URL;
+
   const devSuffix = isDev ? '-dev' : '';
   const stateSuffix = stateToFileName[state];
   const sizeSuffix = size ? `-${size}` : '';
