@@ -56,6 +56,7 @@ const renderHome = async ({
   vi.doMock('../HomePortrait', () => stub('home-portrait'));
   vi.doMock('../InputArea', () => inputAreaStub);
   vi.doMock('../PortraitBubble', () => portraitBubbleStub);
+  vi.doMock('../QuickGuide', () => stub('home-quick-guide'));
   vi.doMock('../AcceptancePortalDrawer', () => stub('acceptance-portal-drawer'));
   vi.doMock('@/business/client/features/useHomePromoLine', () => ({
     useHomePromoLine: vi.fn(() => promo),
@@ -95,6 +96,7 @@ afterEach(() => {
   vi.doUnmock('../HomePortrait');
   vi.doUnmock('../InputArea');
   vi.doUnmock('../PortraitBubble');
+  vi.doUnmock('../QuickGuide');
   vi.doUnmock('../AcceptancePortalDrawer');
   vi.doUnmock('@/business/client/features/useHomePromoLine');
   vi.doUnmock('@/features/HomeInbox');
@@ -171,6 +173,42 @@ describe('Home portrait visibility', () => {
     expect(screen.getByTestId('home-mode-content')).toHaveAttribute('data-mode', 'task');
     expect(screen.queryByTestId('new-model-shortcuts')).not.toBeInTheDocument();
     expect(window.location.search).toBe('');
+  }, 20000);
+
+  it('puts the quick guide right above the chat input', async () => {
+    await renderHome();
+
+    expect(screen.getByTestId('home-quick-guide').nextElementSibling).toBe(
+      screen.getByTestId('home-input-area'),
+    );
+  }, 20000);
+
+  it('leaves the quick guide out of task mode', async () => {
+    await renderHome({ search: '?onboarding=task' });
+
+    expect(screen.queryByTestId('home-quick-guide')).not.toBeInTheDocument();
+  }, 20000);
+
+  it('keeps the quick guide above the input in the minimal layout', async () => {
+    await renderHome({
+      hiddenWidgets: [
+        'goals',
+        'needsYou',
+        'unread',
+        'running',
+        'news',
+        'suggestions',
+        'recents',
+        'tasks',
+      ],
+      showHomePortrait: false,
+    });
+
+    const guide = screen.getByTestId('home-quick-guide');
+    expect(
+      guide.compareDocumentPosition(screen.getByTestId('home-input-area')) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   }, 20000);
 
   it('keeps model shortcuts out of the minimal layout', async () => {

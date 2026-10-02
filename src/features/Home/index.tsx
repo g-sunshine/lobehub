@@ -32,6 +32,7 @@ import {
   HOME_PORTRAIT_INSET,
   HOME_PORTRAIT_WIDTH,
 } from './portraitFraming';
+import QuickGuide from './QuickGuide';
 import { RAIL_INBOX_PROPS, resolveRailVisibility } from './railVisibility';
 import type { HomeMode } from './types';
 
@@ -389,6 +390,7 @@ const Home = memo(() => {
     return (
       <Flexbox className={styles.minimal} gap={MINIMAL_STACK_GAP}>
         <HomeHeader centered />
+        {mode === 'chat' && <QuickGuide />}
         <div className={styles.inputArea}>
           <InputArea
             inputValue={inputValue}
@@ -429,6 +431,8 @@ const Home = memo(() => {
         gap={24}
       >
         <Flexbox className={styles.inputArea} gap={12}>
+          {/* The guide walks through a chat, so task mode has no use for it. */}
+          {mode === 'chat' && <QuickGuide />}
           <InputArea
             showNewModelShortcuts
             inputValue={inputValue}
